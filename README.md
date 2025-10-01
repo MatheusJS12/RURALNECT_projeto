@@ -6,7 +6,10 @@
 * Professor: [Cleyton Vanut Cordeiro de Magalhães](https://github.com/cvanut)
 
 # OBJETIVO DO PROJETO
+<p align='justify'>
 O projeto RURALNECT tem como principal objetivo providenciar, para a comunidade da UFRPE (Universidade Federal Rural de Pernambuco), um sistema que viabilize o acesso às informações da Universidade, bem como proporciar um ambiente em que os estudantes sejam capazes de se ajudarem e desenvolverem seus conhecimentos com o auxílio, por exemplo, de um fórum de perguntas e respostas, disponibilização de videoaulas, lista de questões, dentre outras coisas. Ademais, apesar ser incerto, eventualmente podem ser adicionadas funcionalidades que tornem o projeto mais interativo, funcional e interessante, como a adição de gamificação e um sistema de agendamento de cabines de estudo (sala 33, terceiro andar), promovendo o engajamento com a comunidade. Portanto, o projeto busca cumprir o objetivo de unificar tanto a área informacional, exibindo as principais informações da Universidade, quanto a área educacional, fornecendo meios para o seu desenvolvimento.
+</p>
+
 # FLUXOGRAMAS 1ª VA:
 
 [FLUXOGRAMAS](https://docs.google.com/document/d/1o7MleaB3-arafuOsLmN4BRbw36MKDKd6DMSSJBzkjWU/edit?usp=drive_link)
