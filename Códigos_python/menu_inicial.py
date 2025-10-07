@@ -37,7 +37,7 @@ def condicionais_menu(opcao):
     elif opcao == 3:
         system('cls')
         print('Preparando para exibir informações...')
-        sleep(3)
+        sleep(2)
         # Adicionar a função "ruralnect"
     elif opcao == 4:
         system('cls')
@@ -59,8 +59,9 @@ def cadastro():
     print('=-' * 50)
     nome = str(input('\nInsira o seu nome completo: ').strip().upper())
     if nome.isdigit() or nome == '':
-        print('Seu nome está vázio ou não contém caracteres alfabéticos!')
-        return
+       print('\033[31mSeu nome está vázio ou não contém caracteres alfabéticos!\033[m\n')
+       sleep(5)
+       return
     curso = str(input('Insira as iniciais do seu curso: ').strip().upper())
     email = str(input('Insira o seu e-mail institucional: ').strip().lower())
     if '@ufrpe.br' not in email:
@@ -70,16 +71,18 @@ def cadastro():
         return
     for u in usuarios:
         if email == u['email']:
-            print('Este e-mail já está cadastrado!')
+            print('\033[31mEste e-mail já está cadastrado!\033[m\n')
+            sleep(5)
             return
     senha = str(input('Insira uma senha forte: ').strip())
     senha_tam = len(senha)
     if senha_tam < 6:
-        print('A senha não apresenta quantidade mínima de caracteres!')
-        sleep(3)
+        print('\033[31mA senha não apresenta quantidade mínima de caracteres!\033[m\n')
+        sleep(5)
         return
     elif ' ' in senha:
-        print('A sua senha possui espaços, remova-os!')
+        print('\033[31mA sua senha possui espaços, remova-os!\033[m\n')
+        sleep(5)
         return
     usuarios.append({'nome': nome, 'curso': curso, 'email': email, 'senha': senha})
 
@@ -88,13 +91,14 @@ def cadastro():
 
 def visualizar(usuarios):
     if len(usuarios) <= 0:
-        print('Nenhum cadastro encontrado!')
+        print('\033[31mNenhum cadastro encontrado!\033[m\n')
         sleep(5)
         return
     else:
         print('Nome: {}'.format(usuarios[len(usuarios) - 1]['nome']))
         if usuarios[len(usuarios) - 1]['nome'] == '':
-            print('Nome está vazio!')
+            print('\033[31mNome está vazio!\033[m\n')
+            sleep(5)
             return
         print('Curso: {}'.format(usuarios[len(usuarios) - 1]['curso']))
         print('e-mail: {}'.format(usuarios[len(usuarios) - 1]['email']))
