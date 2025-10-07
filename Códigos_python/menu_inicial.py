@@ -1,12 +1,9 @@
 from os import system
 from time import sleep
-
 # No código estão algumas sequências de escape que têm a função de colorir o terminal. Por exemplo: \033[33m (transforma o texto em amarelo)
 
-usuarios = {'nome': '',
-            'email': '',
-            'curso': '',
-            'senha': ''}
+usuarios = []
+
 
 def menu_inicial():
     while True:
@@ -69,7 +66,12 @@ def cadastro():
     if '@ufrpe.br' not in email:
         system('cls')
         print('\033[31mAdicione um e-mail institucional válido!\033[m\n')
+        sleep(5)
         return
+    for u in usuarios:
+        if email == u['email']:
+            print('Este e-mail já está cadastrado!')
+            return
     senha = str(input('Insira uma senha forte: ').strip())
     senha_tam = len(senha)
     if senha_tam < 6:
@@ -79,25 +81,27 @@ def cadastro():
     elif ' ' in senha:
         print('A sua senha possui espaços, remova-os!')
         return
-    usuarios['senha'] = senha
-    usuarios['curso'] = curso
-    usuarios['email'] = email
-    usuarios['nome'] = nome
-    
+    usuarios.append({'nome': nome, 'curso': curso, 'email': email, 'senha': senha})
+
     input('Pressione Enter para continuar...')
     
 
 def visualizar(usuarios):
-    print('Nome: {}'.format(usuarios['nome']))
-    if usuarios['nome'] == '':
-        print('Nome está vazio!')
+    if len(usuarios) <= 0:
+        print('Nenhum cadastro encontrado!')
+        sleep(5)
         return
-    print('Curso: {}'.format(usuarios['curso']))
-    print('e-mail: {}'.format(usuarios['email']))
-    print('senha: {}'.format(usuarios['senha']))
+    else:
+        print('Nome: {}'.format(usuarios[len(usuarios) - 1]['nome']))
+        if usuarios[len(usuarios) - 1]['nome'] == '':
+            print('Nome está vazio!')
+            return
+        print('Curso: {}'.format(usuarios[len(usuarios) - 1]['curso']))
+        print('e-mail: {}'.format(usuarios[len(usuarios) - 1]['email']))
+        print('senha: {}'.format(usuarios[len(usuarios) - 1]['senha']))
 
-    input('Pressione Enter para continuar!')
+        input('Pressione Enter para continuar!')
 
-    system('cls')
+        system('cls')
 
 menu_inicial()
