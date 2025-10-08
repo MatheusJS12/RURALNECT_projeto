@@ -63,6 +63,10 @@ def cadastro():
        sleep(5)
        return
     curso = str(input('Insira as iniciais do seu curso: ').strip().upper())
+    if curso.isdigit() or curso == '':
+        print('\033[31mSeu curso está vázio ou não contém caracteres alfabéticos!\033[m\n')
+        sleep(5)
+        return
     email = str(input('Insira o seu e-mail institucional: ').strip().lower())
     if '@ufrpe.br' not in email:
         system('cls')
@@ -77,7 +81,7 @@ def cadastro():
     senha = str(input('Insira uma senha forte: ').strip())
     senha_tam = len(senha)
     if senha_tam < 6:
-        print('\033[31mA senha não apresenta quantidade mínima de caracteres!\033[m\n')
+        print('\033[31mA senha não possui a quantidade mínima de caracteres!\033[m\n')
         sleep(5)
         return
     elif ' ' in senha:
@@ -88,7 +92,6 @@ def cadastro():
 
     input('Pressione Enter para continuar...')
     
-
 def visualizar(usuarios):
     if len(usuarios) <= 0:
         print('\033[31mNenhum cadastro encontrado!\033[m\n')
