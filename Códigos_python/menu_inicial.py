@@ -19,8 +19,13 @@ def menu_inicial():
         print('\033[1m4\033[m - \033[33mVisualizar o cadastro\033[m')
         print('\033[1m0\033[m - \033[33mSair do sistema\033[m\n')
 
-        opcao = int(input('Insira a opção desejada: '))
-        condicionais_menu(opcao)
+        try:
+            opcao = int(input('Insira a opção desejada: '))
+            condicionais_menu(opcao)
+        except ValueError:
+            print('O valor inserido não é um número, tente novamente!')
+            sleep(5)
+
 
 def condicionais_menu(opcao):
     if opcao == 1:
@@ -33,7 +38,7 @@ def condicionais_menu(opcao):
         system('cls')
         print('Acessando a área de Login...')
         sleep(2)
-        # Adicionar a função login.
+        login(usuarios)
     elif opcao == 3:
         system('cls')
         print('Preparando para exibir informações...')
@@ -80,8 +85,16 @@ def cadastro():
             return
     senha = str(input('Insira uma senha forte: ').strip())
     senha_tam = len(senha)
-    if senha_tam < 6:
-        print('\033[31mA senha não possui a quantidade mínima de caracteres!\033[m\n')
+    if senha_tam < 6 or senha_tam > 20:
+        print('\033[31mA senha não possui a quantidade mínima de 6 caracteres ou excedeu a quantidade máxima de 20!\033[m\n')
+        sleep(5)
+        return
+    if not any(chr.isnumeric() for chr in senha):
+        print('Sua senha não possui pelo menos um número')
+        sleep(5)
+        return
+    if not any(chr.isupper() for chr in senha):
+        print('Sua senha não possui pelo menos uma letra maiúscula')
         sleep(5)
         return
     elif ' ' in senha:
@@ -110,5 +123,20 @@ def visualizar(usuarios):
         input('Pressione Enter para continuar!')
 
         system('cls')
+
+def login(usuarios):
+    print('=-' * 50)
+    print('{:^105}'.format('\033[34mMenu Login\033[m'))
+    print('=-' * 50)
+    
+    usuario = str(input('Insira o e-mail: ').strip().lower())
+    senha_user = str(input('Insira a senha: ').strip())
+    for u in usuarios:
+        if usuario == u['email'] and senha_user == u['senha']:
+            print('Bem-vindo, {}'.format(u['nome']))
+            return
+        else:
+            print('E-mail e/ou senha incorretos, adicione novamente!')
+    sleep(10)
 
 menu_inicial()
