@@ -44,4 +44,10 @@ O projeto RURALNECT tem como principal objetivo providenciar, para a comunidade 
 * R014 - Sistema de avaliação de respostas
 * R015 - Sistema para que os docentes possam adicionar conteúdo (áreas de videoaulas e questões)
 
-# Bibliotecas (será adicionado futuramente)
+# Bibliotecas (ainda serão adicinadas outras)
+
+* os (utilizado atualmente apenas para limpar o terminal)
+* time (utilizado para adicionar delay antes de exibir algo)
+* smtplib (Utiliado para se conectar ao servidor de e-mail)
+* email (utilizada para criar as mensagens de email)
+* secrets (utilizado para criar códigos para recuperação de senha)
