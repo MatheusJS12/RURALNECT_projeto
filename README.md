@@ -45,9 +45,11 @@ O projeto RURALNECT tem como principal objetivo providenciar, para a comunidade 
 * R015 - Sistema para que os docentes possam adicionar conteúdo (áreas de videoaulas e questões)
 
 # Bibliotecas (ainda serão adicinadas outras)
-
-* os (utilizado atualmente apenas para limpar o terminal)
-* time (utilizado para adicionar delay antes de exibir algo)
-* smtplib (Utiliado para se conectar ao servidor de e-mail)
-* email (utilizada para criar as mensagens de email)
-* secrets (utilizado para criar códigos para recuperação de senha)
+| bibliotecas | utilidade |
+|-------------|-----------|
+| os | utilizado atualmente apenas para limpar o terminal |
+| time | utilizado para adicionar delay antes de exibir algo |
+| smtplib | Utilizado para se conectar ao servidor de e-mail |
+| email | utilizado para criar as mensagens de email |
+| secrets | utilizado para criar códigos para recuperação de senha |
+| webbrowser | utilizado para redirecionar o usuário para as videoaulas, links em geral, apostilas, etc. |
