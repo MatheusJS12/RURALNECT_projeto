@@ -1,5 +1,7 @@
-from os import system, name
+from util import limpar_tela
 from time import sleep
+import webbrowser
+
 # No código estão algumas sequências de escape que têm a função de colorir o terminal. Por exemplo: \033[33m (transforma o texto em amarelo)
 
 usuarios = []
@@ -216,14 +218,51 @@ def menu_principal(usuario_logado):
     print('=-' * 50)
     print('usuário: {}'.format(usuario_logado['nome']))
     print('curso: {}'.format(usuario_logado['curso']))
-    print('\nSelecione uma das opções abaixo para avançar:\n1 - Área de video-aulas\n2 - Área de informações\n3 - Em desenvolvimento\n4 - Em desenvolvimento\n5 - Em desenvolvimento\n')
+    print('\nSelecione uma das opções abaixo para avançar:')
+    print('\n\033[1m1\033[m - \033[33mFórum de perguntas e respostas\033[m') 
+    print('\033[1m2\033[m - \033[33mLista de questões\033[m') 
+    print('\033[1m3\033[m - \033[33mÁrea de videoaulas\033[m')
+    print('\033[1m4\033[m - \033[33mÁrea de informações\033[m')
+    print('\033[1m5\033[m - \033[33mLinks Gerais UFRPE\033[m\n')
+    print('\033[1m0\033[m - \033[33mSair do sistema\033[m\n')
     try:
         op1 = int(input('Insira a opção desejada: '))
     except ValueError:
         print('O valor inserido não é um número, tente novamente!')
         return
+def condicionais2(op1):
+    if op1 == 1:
+        limpar_tela()
+        print('Acessando fórum...')
+        sleep(3)
+        # Área do Fórum
+    elif op1 == 2:
+        limpar_tela()
+        print('Acessando Lista de questões...')
+        sleep(3)
+        # Área da lista
+    elif op1 == 3:
+        limpar_tela()
+        print('Acessando área de vídeoaulas...')
+        sleep(3)
+    elif op1 == 4:
+        limpar_tela()
+        print('Acssando área de informações...')
+        sleep(3)
+    elif op1 == 5:
+        limpar_tela()
+        print('Acessando área de links gerais...')
+        sleep(3)
+    elif op1 == 0:
+        limpar_tela()
+        print('Saindo do sistema...')
+        sleep(3)
+        quit()
+    else:
+        print('A opção inserida é inválida!')
 
-def limpar_tela():
-    system('cls' if name == 'nt' else 'clear')
+def area_videoaulas(usuario_logado):
+    print('')
+
 
 menu_inicial()
