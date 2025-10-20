@@ -1,6 +1,7 @@
 from util import limpar_tela
 from time import sleep
-import webbrowser
+import videoaulas
+import esqueci_minhasenha
 
 # No código estão algumas sequências de escape que têm a função de colorir o terminal. Por exemplo: \033[33m (transforma o texto em amarelo)
 
@@ -181,6 +182,7 @@ def login(usuarios):
                 rest_senha = int(input('Deseja ir para a área de recuperação de senha? (1 - S/0 - N)').strip().lower())
                 if rest_senha == 1:
                     recuperar_senha(usuarios)
+                    return
                 elif rest_senha == 0:
                     print('Voltando ao menu inicial...')
                     sleep(3)
@@ -192,44 +194,71 @@ def login(usuarios):
                 return
             elif usuario == u['email'] and senha_user != u['senha'] or usuario != u['email'] and senha_user == u['senha'] or usuario != u['email'] and senha_user != u['senha']:
                 print('Login não-sucedido, tente novamente!')
-                print('chances restantes')
                 cont = cont - 1
+                print('chances restantes {}'.format(cont))
             
-            print('E-mail e/ou senha incorretos, adicione novamente!')
         sleep(5)
+        limpar_tela()
 def recuperar_senha(usuarios):
     limpar_tela()
     print('=-' * 50)
     print('{:^105}'.format('\033[34mRecuperação de senha\033[m'))
     print('=-' * 50)
     print('\nPara efetuar a recuperação de senha, você deverá inserir o e-mail e o código que será enviado!\n')
-    email = str(input('Insira o e-mail: ').strip().lower())
+    email_user = str(input('Insira o e-mail: ').strip().lower())
     for u in usuarios:
-        if email == u['email']:
-            # Adicionar a parte do email
-            print('Código enviado!')
-            print('Caso não encontre na caixa principal, veja na caixa de spam.')
+        if email_user == u['email']:
+            user = u['nome']
+            esqueci_minhasenha.esqueci_minhasenha(usuarios, user, email_user)
+            codigo_rec = str(input('Insira o código recebido no e-mail: '))
+            if codigo_rec == esqueci_minhasenha.num_secreto:
+                nova_senha = str(input('Insira uma nova senha: ').strip())
+                novasenha_tam = len(nova_senha)
+                if novasenha_tam < 6 or novasenha_tam > 20:
+                    print('\033[31mA senha não possui a quantidade mínima de 6 caracteres ou excedeu a quantidade máxima de 20!\033[m\n')
+                    sleep(5)
+                    return
+                if not any(chr.isnumeric() for chr in nova_senha):
+                    print('Sua senha não possui pelo menos um número')
+                    sleep(5)
+                    return
+                if not any(chr.isupper() for chr in nova_senha):
+                    print('Sua senha não possui pelo menos uma letra maiúscula')
+                    sleep(5)
+                    return
+                elif ' ' in nova_senha:
+                    print('\033[31mA sua senha possui espaços, remova-os!\033[m\n')
+                    sleep(5)
+                    return
+                conf_novasenha = str(input('Confirme sua nova senha: ').strip())
+                if conf_novasenha == nova_senha:
+                    u['senha'] = nova_senha
+                    menu_inicial()
+        
+            
 
 def menu_principal(usuario_logado):
     # Tela após o login!
-    limpar_tela()
-    print('=-' * 50)
-    print('{:^105}'.format('\033[34mMenu Principal\033[m'))
-    print('=-' * 50)
-    print('usuário: {}'.format(usuario_logado['nome']))
-    print('curso: {}'.format(usuario_logado['curso']))
-    print('\nSelecione uma das opções abaixo para avançar:')
-    print('\n\033[1m1\033[m - \033[33mFórum de perguntas e respostas\033[m') 
-    print('\033[1m2\033[m - \033[33mLista de questões\033[m') 
-    print('\033[1m3\033[m - \033[33mÁrea de videoaulas\033[m')
-    print('\033[1m4\033[m - \033[33mÁrea de informações\033[m')
-    print('\033[1m5\033[m - \033[33mLinks Gerais UFRPE\033[m\n')
-    print('\033[1m0\033[m - \033[33mSair do sistema\033[m\n')
-    try:
-        op1 = int(input('Insira a opção desejada: '))
-    except ValueError:
-        print('O valor inserido não é um número, tente novamente!')
-        return
+    while True:
+        limpar_tela()
+        print('=-' * 50)
+        print('{:^105}'.format('\033[34mMenu Principal\033[m'))
+        print('=-' * 50)
+        print('usuário: {}'.format(usuario_logado['nome']))
+        print('curso: {}'.format(usuario_logado['curso']))
+        print('\nSelecione uma das opções abaixo para avançar:')
+        print('\n\033[1m1\033[m - \033[33mFórum de perguntas e respostas\033[m') 
+        print('\033[1m2\033[m - \033[33mLista de questões\033[m') 
+        print('\033[1m3\033[m - \033[33mÁrea de videoaulas\033[m')
+        print('\033[1m4\033[m - \033[33mÁrea de informações\033[m')
+        print('\033[1m5\033[m - \033[33mLinks Gerais UFRPE\033[m\n')
+        print('\033[1m0\033[m - \033[33mDeslogar\033[m\n')
+        try:
+            op1 = int(input('Insira a opção desejada: '))
+            condicionais2(op1)
+        except ValueError:
+            print('O valor inserido não é um número, tente novamente!')
+            return
 def condicionais2(op1):
     if op1 == 1:
         limpar_tela()
@@ -245,6 +274,7 @@ def condicionais2(op1):
         limpar_tela()
         print('Acessando área de vídeoaulas...')
         sleep(3)
+        videoaulas.area_videoaulas(usuario_logado)
     elif op1 == 4:
         limpar_tela()
         print('Acssando área de informações...')
@@ -255,14 +285,11 @@ def condicionais2(op1):
         sleep(3)
     elif op1 == 0:
         limpar_tela()
-        print('Saindo do sistema...')
+        print('Deslogando...')
         sleep(3)
-        quit()
+        menu_inicial()
     else:
         print('A opção inserida é inválida!')
-
-def area_videoaulas(usuario_logado):
-    print('')
 
 
 menu_inicial()
