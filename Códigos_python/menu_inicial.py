@@ -2,6 +2,7 @@ from util import limpar_tela
 from time import sleep
 import videoaulas
 import esqueci_minhasenha
+import menuinformaçoes
 
 # No código estão algumas sequências de escape que têm a função de colorir o terminal. Por exemplo: \033[33m (transforma o texto em amarelo)
 
@@ -124,11 +125,12 @@ def cadastro():
     senha_confirm = str(input('Insira a senha novamente para confirmar: ').strip())
     if senha_confirm != senha:
         print('Erro: A senha inserida não corresponde à adicionada anteriormente!')
+        sleep(3)
         return
 
     usuarios.append({'nome': nome, 'curso': curso, 'email': email, 'senha': senha})
 
-    print('Cadastro realizado com sucesso!\n')
+    print('\033[32mCadastro realizado com sucesso!\033[m\n')
     input('Pressione Enter para continuar...')
     
 def visualizar(usuarios):
@@ -179,7 +181,7 @@ def login(usuarios):
                 print('A quantidade de tentativas de login superou o limite de 3 chances, tente novamente mais tarde!')
                 sleep(5)
                 limpar_tela()
-                rest_senha = int(input('Deseja ir para a área de recuperação de senha? (1 - S/0 - N)').strip().lower())
+                rest_senha = int(input('Deseja ir para a área de recuperação de senha? (1 - S/0 - N): ').strip().lower())
                 if rest_senha == 1:
                     recuperar_senha(usuarios)
                     return
@@ -200,6 +202,7 @@ def login(usuarios):
         sleep(5)
         limpar_tela()
 def recuperar_senha(usuarios):
+    cont = 0
     limpar_tela()
     print('=-' * 50)
     print('{:^105}'.format('\033[34mRecuperação de senha\033[m'))
@@ -212,28 +215,34 @@ def recuperar_senha(usuarios):
             esqueci_minhasenha.esqueci_minhasenha(usuarios, user, email_user)
             codigo_rec = str(input('Insira o código recebido no e-mail: '))
             if codigo_rec == esqueci_minhasenha.num_secreto:
-                nova_senha = str(input('Insira uma nova senha: ').strip())
-                novasenha_tam = len(nova_senha)
-                if novasenha_tam < 6 or novasenha_tam > 20:
-                    print('\033[31mA senha não possui a quantidade mínima de 6 caracteres ou excedeu a quantidade máxima de 20!\033[m\n')
-                    sleep(5)
-                    return
-                if not any(chr.isnumeric() for chr in nova_senha):
-                    print('Sua senha não possui pelo menos um número')
-                    sleep(5)
-                    return
-                if not any(chr.isupper() for chr in nova_senha):
-                    print('Sua senha não possui pelo menos uma letra maiúscula')
-                    sleep(5)
-                    return
-                elif ' ' in nova_senha:
-                    print('\033[31mA sua senha possui espaços, remova-os!\033[m\n')
-                    sleep(5)
-                    return
-                conf_novasenha = str(input('Confirme sua nova senha: ').strip())
-                if conf_novasenha == nova_senha:
-                    u['senha'] = nova_senha
-                    menu_inicial()
+                while cont < 1:
+                    nova_senha = str(input('Insira uma nova senha: ').strip())
+                    novasenha_tam = len(nova_senha)
+                    if novasenha_tam < 6 or novasenha_tam > 20:
+                        print('\033[31mA senha não possui a quantidade mínima de 6 caracteres ou excedeu a quantidade máxima de 20!\033[m\n')
+                        sleep(5)
+                        return
+                    if not any(chr.isnumeric() for chr in nova_senha):
+                        print('Sua senha não possui pelo menos um número')
+                        sleep(5)
+                        return
+                    if not any(chr.isupper() for chr in nova_senha):
+                        print('Sua senha não possui pelo menos uma letra maiúscula')
+                        sleep(5)
+                        return
+                    elif ' ' in nova_senha:
+                        print('\033[31mA sua senha possui espaços, remova-os!\033[m\n')
+                        sleep(5)
+                        return
+                    conf_novasenha = str(input('Confirme sua nova senha: ').strip())
+                    if conf_novasenha == nova_senha:
+                        u['senha'] = nova_senha
+                        cont = cont + 1
+                        menu_inicial()
+                    else:
+                        cont = 0
+        else:
+            menu_inicial()
         
             
 
@@ -279,6 +288,7 @@ def condicionais2(op1):
         limpar_tela()
         print('Acssando área de informações...')
         sleep(3)
+        menuinformaçoes.area_informacoes(usuario_logado)
     elif op1 == 5:
         limpar_tela()
         print('Acessando área de links gerais...')
