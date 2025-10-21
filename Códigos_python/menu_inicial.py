@@ -23,7 +23,7 @@ def menu_inicial():
         print('\nBem-vindo à RURALNECT!')
         print('\nSelecione uma das opções abaixo para avançar:')
         print('\n\033[1m1\033[m - \033[33mCadastro\033[m') 
-        print('\033[1m2\033[m - \033[33mLogin (inacessível)\033[m') 
+        print('\033[1m2\033[m - \033[33mLogin\033[m') 
         print('\033[1m3\033[m - \033[33mO que é a plataforma RURALNECT?\033[m')
         print('\033[1m4\033[m - \033[33mVisualizar o cadastro\033[m')
         print('\033[1m0\033[m - \033[33mSair do sistema\033[m\n')

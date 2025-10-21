@@ -4,6 +4,9 @@ import secrets
 from util import limpar_tela
 from time import sleep
 
+# https://www.youtube.com/watch?v=N97q96BygUg
+# Link do vídeo do código.
+
 num_secreto = secrets.token_hex(3)
 
 limpar_tela()
@@ -46,7 +49,7 @@ def esqueci_minhasenha(usuarios, user, email_user):
     s.login(msg['From'], password)
     s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
     print('\033[32mEmail enviado com sucesso!\033[m\n')
-    print('\033{33mCaso não encontre na caixa principal, veja na caixa de spam.\033[m')
+    print('\033[33mCaso não encontre na caixa principal, verifique a caixa de spam.\033[m')
 
 
     
