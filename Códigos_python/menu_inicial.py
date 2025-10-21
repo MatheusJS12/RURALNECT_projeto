@@ -261,6 +261,7 @@ def menu_principal(usuario_logado):
         print('\033[1m3\033[m - \033[33mÁrea de videoaulas\033[m')
         print('\033[1m4\033[m - \033[33mÁrea de informações\033[m')
         print('\033[1m5\033[m - \033[33mLinks Gerais UFRPE\033[m\n')
+        print('\033[1m6\033[m - \033[33mÁrea bibliográfica\033[m\n')
         print('\033[1m0\033[m - \033[33mDeslogar\033[m\n')
         try:
             op1 = int(input('Insira a opção desejada: '))

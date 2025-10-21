@@ -31,9 +31,9 @@ def tipo_de_informacao(option, usuario_logado):
       print('Sobre o que você gostaria de receber informações\n')
       print('\033[1m1\033m - \033[33mInformações sobre o Restaurante Universitário\033[m')
       print('\033[1m2\033[m - \033[33mContatos\033[m\n')
-      option_geinfo = int(input('digite a opcao desejada: '))
+      opcao_geinfo = int(input('digite a opcao desejada: '))
       limpar_tela()
-      if option_geinfo == 1:
+      if opcao_geinfo == 1:
          limpar_tela()
          print('\033[32mAqui estão as principais informações sobre o RU:\033[m\n')
          sleep(5)
@@ -41,7 +41,7 @@ def tipo_de_informacao(option, usuario_logado):
          input('Pressione Enter para continuar...')
          limpar_tela()
          return 
-      elif option_geinfo == 2:
+      elif opcao_geinfo == 2:
          limpar_tela()
          print('\033[32mAqui estão o contatos da Universidade Rural de Pernambuco:\033[m\n')
          sleep(5)
@@ -52,7 +52,7 @@ def tipo_de_informacao(option, usuario_logado):
       else:
            print('\033[31mO valor inserido não é válido, favor tente novamente\033[m\n')
            sleep(3)
-           return option_geinfo
+           return
    elif option == 2:
       curso_info = usuario_logado['curso']
       if curso_info == 'Bacharelado em Sistemas de Informação':
