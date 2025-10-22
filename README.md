@@ -50,6 +50,6 @@ O projeto RURALNECT tem como principal objetivo providenciar, para a comunidade 
 | os | utilizado atualmente apenas para limpar o terminal |
 | time | utilizado para adicionar delay antes de exibir algo |
 | smtplib | Utilizado para se conectar ao servidor de e-mail |
-| email | utilizado para criar as mensagens de email |
+| email.message | utilizado para criar as mensagens de email |
 | secrets | utilizado para criar códigos para recuperação de senha |
 | webbrowser | utilizado para redirecionar o usuário para as videoaulas, links em geral, apostilas, etc. |
