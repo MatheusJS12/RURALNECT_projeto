@@ -99,8 +99,8 @@ def cadastro():
         print('\033[31mAdicione um e-mail institucional válido!\033[m\n')
         sleep(5)
         return
-    for u in usuarios:
-        if email == u['email']:
+    for usuario in usuarios:
+        if email == usuario['email']:
             print('\033[31mEste e-mail já está cadastrado!\033[m\n')
             sleep(5)
             return
@@ -174,9 +174,9 @@ def login(usuarios):
     cont = 3
     
     while rest_senha != '1':
-        usuario = str(input('Insira o e-mail: ').strip().lower())
+        usuario_email = str(input('Insira o e-mail: ').strip().lower())
         senha_user = str(input('Insira a senha: ').strip())
-        for u in usuarios:
+        for usuario in usuarios:
             if cont == 0:
                 print('A quantidade de tentativas de login superou o limite de 3 chances, tente novamente mais tarde!')
                 sleep(5)
@@ -189,12 +189,12 @@ def login(usuarios):
                     print('Voltando ao menu inicial...')
                     sleep(3)
                     return
-            if usuario == u['email'] and senha_user == u['senha']:
-                print('Bem-vindo, {}'.format(u['nome']))
-                usuario_logado['nome'] = u['nome']
-                usuario_logado['curso'] = u['curso']
+            if usuario_email == usuario['email'] and senha_user == usuario['senha']:
+                print('Bem-vindo, {}'.format(usuario['nome']))
+                usuario_logado['nome'] = usuario['nome']
+                usuario_logado['curso'] = usuario['curso']
                 return
-            elif usuario == u['email'] and senha_user != u['senha'] or usuario != u['email'] and senha_user == u['senha'] or usuario != u['email'] and senha_user != u['senha']:
+            elif usuario_email == usuario['email'] and senha_user != usuario['senha'] or usuario_email != usuario['email'] and senha_user == usuario['senha'] or usuario_email != usuario['email'] and senha_user != usuario['senha']:
                 print('Login não-sucedido, tente novamente!')
                 cont = cont - 1
                 print('chances restantes {}'.format(cont))
@@ -209,9 +209,9 @@ def recuperar_senha(usuarios):
     print('=-' * 50)
     print('\nPara efetuar a recuperação de senha, você deverá inserir o e-mail e o código que será enviado!\n')
     email_user = str(input('Insira o e-mail: ').strip().lower())
-    for u in usuarios:
-        if email_user == u['email']:
-            user = u['nome']
+    for usuario in usuarios:
+        if email_user == usuario['email']:
+            user = usuario['nome']
             esqueci_minhasenha.esqueci_minhasenha(usuarios, user, email_user)
             codigo_rec = str(input('Insira o código recebido no e-mail: '))
             if codigo_rec == esqueci_minhasenha.num_secreto:
@@ -236,7 +236,7 @@ def recuperar_senha(usuarios):
                         return
                     conf_novasenha = str(input('Confirme sua nova senha: ').strip())
                     if conf_novasenha == nova_senha:
-                        u['senha'] = nova_senha
+                        usuario['senha'] = nova_senha
                         cont = cont + 1
                         menu_inicial()
                     else:
