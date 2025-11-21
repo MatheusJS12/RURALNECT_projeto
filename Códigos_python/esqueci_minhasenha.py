@@ -1,29 +1,26 @@
 import smtplib
 import email.message
 import secrets
-from util import limpar_tela
-from time import sleep
+from util import Util
 
 # https://www.youtube.com/watch?v=N97q96BygUg
 # Link do vídeo do código.
 
 num_secreto = secrets.token_hex(3)
 
-limpar_tela()
 
-sleep(5)
-limpar_tela()
 def esqueci_minhasenha(usuarios, user, email_user):
     
     if  len(email_user) <= 0:
-        print('\033[31mA área está vazia, favor preencher\033[m\n')
-        limpar_tela()
-        sleep(5)
+        Util.erro_txt('A área está vazia, favor preencher')
+        Util.limpar_tela()
+        Util.pausa(5)
         return 
     else:
-        print('\033[32mEmail cadastrado, iremos enviar um email para a redefiniçao da senha\033[m\n')
-        limpar_tela()
-        sleep(5)
+        Util.txt_certo('Email cadastrado, iremos enviar um email para a redefiniçao da senha')
+        Util.pausa(5)
+        Util.limpar_tela()
+        
 
     corpo_email = """
     <p>Olá, {},</p>
@@ -48,8 +45,8 @@ def esqueci_minhasenha(usuarios, user, email_user):
     s.starttls()
     s.login(msg['From'], password)
     s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
-    print('\033[32mEmail enviado com sucesso!\033[m\n')
-    print('\033[33mCaso não encontre na caixa principal, verifique a caixa de spam.\033[m')
+    Util.txt_certo('Email enviado com sucesso!')
+    Util.txt_aviso('Caso não encontre na caixa principal, verifique a caixa de spam.')
 
 
     

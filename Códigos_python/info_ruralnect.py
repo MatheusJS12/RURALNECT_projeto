@@ -1,10 +1,8 @@
-from util import limpar_tela
+from util import Util
 
 def info_rural(texto_recortado):
-    limpar_tela()
-    print('=-' * 50)
-    print('{:^105}'.format('\033[34mO que é a plataforma RURALNECT?\033[m'))
-    print('=-' * 50)
+    Util.limpar_tela()
+    Util.cabecalho('O que é a plataforma RURALNECT?')
     contador = 0
     texto_junto = ' '.join(texto_recortado)
     for i in texto_junto:

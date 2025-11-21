@@ -1,5 +1,5 @@
-from util import limpar_tela
-from time import sleep
+from util import Util
+from colorama import Fore, Back, Style, init
 import videoaulas
 import esqueci_minhasenha
 import informaçoes
@@ -7,6 +7,8 @@ import cadastro
 import login
 import visualizar_usuarios
 import info_ruralnect
+
+init(autoreset=True)
 
 # No código estão algumas sequências de escape que têm a função de colorir o terminal. Por exemplo: \033[33m (transforma o texto em amarelo)
 
@@ -20,77 +22,73 @@ texto_recortado = ruralnect_texto['texto'].split()
 
 def menu_inicial():
     while True:
-        limpar_tela()
-        print('=-' * 50)
-        print('{:^105}'.format('\033[34mMenu Inicial\033[m'))
-        print('=-' * 50)
+        Util.limpar_tela()
+        Util.cabecalho('Menu Inicial')
         print('\nBem-vindo à RURALNECT!')
-        print('\nSelecione uma das opções abaixo para avançar:')
-        print('\n\033[1m1\033[m - \033[33mCadastro\033[m') 
-        print('\033[1m2\033[m - \033[33mLogin\033[m') 
-        print('\033[1m3\033[m - \033[33mO que é a plataforma RURALNECT?\033[m')
-        print('\033[1m4\033[m - \033[33mVisualizar o cadastro\033[m')
-        print('\033[1m0\033[m - \033[33mSair do sistema\033[m\n')
+        print('\nSelecione uma das opções abaixo para avançar:\n')
+        print(Style.BRIGHT + '1 - ' + Style.NORMAL + Fore.YELLOW + 'Cadastro') 
+        print(Style.BRIGHT + '2 - ' + Style.NORMAL + Fore.YELLOW + 'Login') 
+        print(Style.BRIGHT + '3 - ' + Style.NORMAL + Fore.YELLOW + 'O que é a plataforma RURALNECT?') 
+        print(Style.BRIGHT + '4 - ' + Style.NORMAL + Fore.YELLOW + 'Visualizar o cadastro') 
+        print(Style.BRIGHT + '0 - ' + Style.NORMAL + Fore.YELLOW + 'Sair do Sistema\n') 
 
         try:
             opcao = int(input('Insira a opção desejada: '))
             condicionais_menu(opcao)
         except ValueError:
-            print('O valor inserido não é um número, tente novamente!')
-            sleep(5)
+            Util.erro_txt('O valor inserido não é um número, tente novamente!')
+            Util.pausa(5)
 
 
 def condicionais_menu(opcao):
     if opcao == 1:
-        limpar_tela()
+        Util.limpar_tela()
         print(('Acessando a área de Cadastro...'))
-        sleep(2)
-        limpar_tela()
+        Util.pausa(2)
+        Util.limpar_tela()
         cadastro.cadastro_usuario(usuarios)
     elif opcao == 2:
-        limpar_tela()
+        Util.limpar_tela()
         print('Acessando a área de Login...')
-        sleep(2)
+        Util.pausa(2)
         login.login(usuarios, menu_inicial, usuario_logado)
         menu_principal(usuario_logado)
     elif opcao == 3:
-        limpar_tela()
+        Util.limpar_tela()
         print('Preparando para exibir informações...')
-        sleep(2)
+        Util.pausa(2)
         info_ruralnect.info_rural(texto_recortado)
     elif opcao == 4:
-        limpar_tela()
+        Util.limpar_tela()
         print('Acessando a área de visualização de informações...')
-        sleep(2)
+        Util.pausa(2)
         visualizar_usuarios.visualizar(usuarios)
 
     elif opcao == 0:
-        limpar_tela()
+        Util.limpar_tela()
         print('Saindo do sistema...')
-        sleep(3)
+        Util.pausa(3)
         quit()
     else:
-        limpar_tela()
+        Util.limpar_tela()
         print('A opção inserida é inválida!')
             
 
 def menu_principal(usuario_logado):
     # Tela após o login!
     while True:
-        limpar_tela()
-        print('=-' * 50)
-        print('{:^105}'.format('\033[34mMenu Principal\033[m'))
-        print('=-' * 50)
+        Util.limpar_tela()
+        Util.cabecalho('Menu Principal')
         print('usuário: {}'.format(usuario_logado['nome']))
         print('curso: {}'.format(usuario_logado['curso']))
         print('\nSelecione uma das opções abaixo para avançar:')
-        print('\n\033[1m1\033[m - \033[33mFórum de perguntas e respostas\033[m') 
-        print('\033[1m2\033[m - \033[33mLista de questões\033[m') 
-        print('\033[1m3\033[m - \033[33mÁrea de videoaulas\033[m')
-        print('\033[1m4\033[m - \033[33mÁrea de informações\033[m')
-        print('\033[1m5\033[m - \033[33mLinks Gerais UFRPE\033[m\n')
-        print('\033[1m6\033[m - \033[33mÁrea bibliográfica\033[m\n')
-        print('\033[1m0\033[m - \033[33mDeslogar\033[m\n')
+        print(Style.BRIGHT + '1 - ' + Style.NORMAL + Fore.YELLOW + 'Fórum de perguntas e respostas') 
+        print(Style.BRIGHT + '2 - ' + Style.NORMAL + Fore.YELLOW + 'Lista de questões')
+        print(Style.BRIGHT + '3 - ' + Style.NORMAL + Fore.YELLOW + 'Área de videoaulas') 
+        print(Style.BRIGHT + '4 - ' + Style.NORMAL + Fore.YELLOW + 'Área de informações') 
+        print(Style.BRIGHT + '5 - ' + Style.NORMAL + Fore.YELLOW + 'Links gerais UFRPE') 
+        print(Style.BRIGHT + '6 - ' + Style.NORMAL + Fore.YELLOW + 'Área bibliográfica')
+        print(Style.BRIGHT + '0 - ' + Style.NORMAL + Fore.YELLOW + 'Deslogar') 
         try:
             op1 = int(input('Insira a opção desejada: '))
             condicionais2(op1)
@@ -99,36 +97,36 @@ def menu_principal(usuario_logado):
             return
 def condicionais2(op1):
     if op1 == 1:
-        limpar_tela()
+        Util.limpar_tela()
         print('Acessando fórum...')
-        sleep(3)
+        Util.pausa(3)
         # Área do Fórum
     elif op1 == 2:
-        limpar_tela()
+        Util.limpar_tela()
         print('Acessando Lista de questões...')
-        sleep(3)
+        Util.pausa(3)
         # Área da lista
     elif op1 == 3:
-        limpar_tela()
+        Util.limpar_tela()
         print('Acessando área de vídeoaulas...')
-        sleep(3)
+        Util.pausa(3)
         videoaulas.area_videoaulas(usuario_logado)
     elif op1 == 4:
-        limpar_tela()
+        Util.limpar_tela()
         print('Acssando área de informações...')
-        sleep(3)
+        Util.pausa(3)
         informaçoes.area_informacoes(usuario_logado)
     elif op1 == 5:
-        limpar_tela()
+        Util.limpar_tela()
         print('Acessando área de links gerais...')
-        sleep(3)
+        Util.pausa(3)
     elif op1 == 0:
-        limpar_tela()
+        Util.limpar_tela()
         print('Deslogando...')
-        sleep(3)
+        Util.pausa(3)
         menu_inicial()
     else:
-        print('A opção inserida é inválida!')
+        Util.erro_txt('A opção inserida é inválida!')
 
 
 menu_inicial()
