@@ -53,3 +53,14 @@ O projeto RURALNECT tem como principal objetivo providenciar, para a comunidade 
 | email.message | utilizado para criar as mensagens de email |
 | secrets | utilizado para criar códigos para recuperação de senha |
 | webbrowser | utilizado para redirecionar o usuário para as videoaulas, links em geral, apostilas, etc. |
+| colorama | utilizado para colorir o terminal |
+| emoji | utilizado para adicionar emojis |
+
+# INSTALAÇÃO NECESSÁRIA DAS SEGUINTES BIBLIOTECAS PARA O FUNCIONAMENTO DO CÓDIGO:
+
+```
+pip install colorama
+pip install emoji
+
+ ```
+
