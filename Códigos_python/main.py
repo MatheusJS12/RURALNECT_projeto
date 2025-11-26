@@ -3,21 +3,22 @@ from colorama import Fore, Back, Style, init
 import videoaulas
 import esqueci_minhasenha
 import informaçoes
-import cadastro
+from auth import Auth
 import login
 import visualizar_usuarios
 import info_ruralnect
+from links_gerais import Links
 
 init(autoreset=True)
 
 # No código estão algumas sequências de escape que têm a função de colorir o terminal. Por exemplo: \033[33m (transforma o texto em amarelo)
 
-usuarios = []
-usuario_logado = {'nome': '', 'curso': ''}
 
 ruralnect_texto = {'texto': 'A RURALNECT é uma plataforma criada para integrar e facilitar o acesso às informações da Universidade Federal Rural de Pernambuco (UFRPE), além de promover a colaboração e o aprendizado entre os estudantes. Por meio do sistema, é possível encontrar fóruns de perguntas e respostas, videoaulas, listasde questões e outros recursos voltados ao desenvolvimento acadêmico e à troca de conhecimento. O projeto também visa tornar a experiência universitária mais interativa e envolvente, com futuras funcionalidades como gamificação e agendamento de cabines de estudo (sala 33, terceiro andar), incentivando o engajamento da comunidade. Em essência, a RURALNECT busca unir informação e educação, servindo como um ponto de conexão entre a universidade e seus estudantes.'}
 
 texto_recortado = ruralnect_texto['texto'].split()
+
+user = Auth()
 
 
 def menu_inicial():
@@ -36,7 +37,7 @@ def menu_inicial():
             opcao = int(input('Insira a opção desejada: '))
             condicionais_menu(opcao)
         except ValueError:
-            Util.erro_txt('O valor inserido não é um número, tente novamente!')
+            Util.erro_txt('O valor inserido não é um número inteiro, tente novamente!')
             Util.pausa(5)
 
 
@@ -46,23 +47,23 @@ def condicionais_menu(opcao):
         print(('Acessando a área de Cadastro...'))
         Util.pausa(2)
         Util.limpar_tela()
-        cadastro.cadastro_usuario(usuarios)
+        user.cadastro_usuario()
     elif opcao == 2:
         Util.limpar_tela()
         print('Acessando a área de Login...')
         Util.pausa(2)
-        login.login(usuarios, menu_inicial, usuario_logado)
-        menu_principal(usuario_logado)
+        user.login(menu_inicial)
+        menu_principal(user.usuario_logado)
     elif opcao == 3:
         Util.limpar_tela()
         print('Preparando para exibir informações...')
         Util.pausa(2)
-        info_ruralnect.info_rural(texto_recortado)
+        Util.info_rural(texto_recortado)
     elif opcao == 4:
         Util.limpar_tela()
         print('Acessando a área de visualização de informações...')
         Util.pausa(2)
-        visualizar_usuarios.visualizar(usuarios)
+        visualizar_usuarios.visualizar(user.usuarios)
 
     elif opcao == 0:
         Util.limpar_tela()
@@ -110,16 +111,18 @@ def condicionais2(op1):
         Util.limpar_tela()
         print('Acessando área de vídeoaulas...')
         Util.pausa(3)
-        videoaulas.area_videoaulas(usuario_logado)
+        videoaulas.area_videoaulas(user.usuario_logado)
     elif op1 == 4:
         Util.limpar_tela()
         print('Acssando área de informações...')
         Util.pausa(3)
-        informaçoes.area_informacoes(usuario_logado)
+        informaçoes.area_informacoes(user.usuario_logado)
     elif op1 == 5:
         Util.limpar_tela()
         print('Acessando área de links gerais...')
         Util.pausa(3)
+        user1 = Links()
+        user1.links_gerais(menu_principal, user.usuario_logado)
     elif op1 == 0:
         Util.limpar_tela()
         print('Deslogando...')
