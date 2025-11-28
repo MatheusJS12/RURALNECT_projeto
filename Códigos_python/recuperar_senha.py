@@ -1,5 +1,6 @@
 from util import Util
 import esqueci_minhasenha
+import socket
 
 def recuperar_senha(usuarios, menu_inicial):
     cont = 0
@@ -10,7 +11,13 @@ def recuperar_senha(usuarios, menu_inicial):
     for usuario in usuarios:
         if email_user == usuario['email']:
             user = usuario['nome']
-            esqueci_minhasenha.esqueci_minhasenha(usuarios, user, email_user)
+            try:
+                esqueci_minhasenha.esqueci_minhasenha(usuarios, user, email_user)
+
+            except socket.gaierror:
+                Util.erro_txt('E-mail não enviado: Usuário sem internet')
+                Util.continuar()
+                return menu_inicial()
             codigo_rec = str(input('Insira o código recebido no e-mail: '))
             if codigo_rec == esqueci_minhasenha.num_secreto:
                 while cont < 1:

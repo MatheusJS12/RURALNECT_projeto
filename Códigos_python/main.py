@@ -4,10 +4,9 @@ import videoaulas
 import esqueci_minhasenha
 import informaçoes
 from auth import Auth
-import login
 import visualizar_usuarios
-import info_ruralnect
 from links_gerais import Links
+from forum import Forum
 
 init(autoreset=True)
 
@@ -72,7 +71,8 @@ def condicionais_menu(opcao):
         quit()
     else:
         Util.limpar_tela()
-        print('A opção inserida é inválida!')
+        Util.erro_txt('A opção inserida é inválida!')
+        Util.pausa(3)
             
 
 def menu_principal(usuario_logado):
@@ -101,7 +101,8 @@ def condicionais2(op1):
         Util.limpar_tela()
         print('Acessando fórum...')
         Util.pausa(3)
-        # Área do Fórum
+        user1 = Forum()
+        user1.pergunta_resposta(menu_principal(user.usuario_logado))
     elif op1 == 2:
         Util.limpar_tela()
         print('Acessando Lista de questões...')
