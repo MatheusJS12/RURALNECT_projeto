@@ -32,11 +32,11 @@ def recuperar_senha(usuarios, menu_inicial):
                         Util.pausa(5)
                         return
                     if not any(chr.isupper() for chr in nova_senha):
-                        print('Sua senha não possui pelo menos uma letra maiúscula')
+                        Util.erro_txt('Sua senha não possui letra maiúscula!')
                         Util.pausa(5)
                         return
                     elif ' ' in nova_senha:
-                        print('\033[31mA sua senha possui espaços, remova-os!\033[m\n')
+                        Util.erro_txt('A sua senha possui espaços, remova-os!\n')
                         Util.pausa(5)
                         return
                     conf_novasenha = str(input('Confirme sua nova senha: ').strip())

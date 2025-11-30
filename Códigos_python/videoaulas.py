@@ -6,7 +6,11 @@ def area_videoaulas(usuario_logado):
         print('=' * 70)
         print('{:^70}'.format('Cadeiras - BSI'))
         print('=' * 70)
-        print('1 - Fundamentos de matemática para Sistemas de Informação 1\n2 - Introdução à Administraçao\n3 - Princípios de Programação\n4 - Sustentabilidade em Sistemas de Informação\n5 - Projeto Interdisciplinar para Sistemas de informação 1 ')
+        Util.txt_opcao('1', 'Fundamentos de matemática para Sistemas de Informação 1')
+        Util.txt_opcao('2', 'Introdução à Administração')
+        Util.txt_opcao('3', 'Princípios de Programação')
+        Util.txt_opcao('4', 'Sustentabilidade em Sistemas de Informação')
+        Util.txt_opcao('5', 'Projeto Interdisciplinar para Sistemas de Informação 1')
         print('=' * 70)
         opcao = int(input('\nInsira a cadeira desejada: '))
         Util.limpar_tela()
@@ -46,7 +50,10 @@ def area_videoaulas(usuario_logado):
             print('=' * 50)
             print('{:^50}'.format('Assuntos - BSI'))
             print('=' * 50)
-            print('\n1 - Conceitos Iniciais\n2 - Ambiente Externo\n3 - Tomada de Decisão Administrativa\n4 - Ética e Responsabilidade Empresarial\n')
+            Util.txt_opcao('1', 'Conceitos Iniciais')
+            Util.txt_opcao('2', 'Ambiente Externo')
+            Util.txt_opcao('3', 'Tomada de Decisão Administrativa')
+            Util.txt_opcao('4', 'Ética e Responsabilidade Empresarial')
             opcao_assunto = int(input('Insira o valor correspondente ao assunto desejado: '))
 
             if opcao_assunto == 1:
@@ -85,7 +92,10 @@ def area_videoaulas(usuario_logado):
             print('=' * 50)
             print('{:^50}'.format('Assuntos - BSI'))
             print('=' * 50)
-            print('\n1 - Representações de um algoritmo\n2 - Lógica de Programação\n3 - Introdução ao Python\n')
+            Util.txt_opcao('1', 'Representações de um algoritmo')
+            Util.txt_opcao('2', 'Lógica de Programação')
+            Util.txt_opcao('3', 'Introdução ao Python')
+
             opcao_assunto = int(input('Insira o valor correspondente ao assunto desejado: '))
 
             if opcao_assunto == 1:
@@ -116,7 +126,12 @@ def area_videoaulas(usuario_logado):
             print('=' * 50)
             print('{:^50}'.format('Assuntos - BSI'))
             print('=' * 50)
-            print('\n1 - Papel dos SIs na Sustentabilidade\n2 - Economia Digital e seus reflexos sustentáveis\n3 - Impactos Sociais das Tecnologias\n4 - Tecnologia e Meio Ambiente\n5 - TI Verde\n')
+            Util.txt_opcao('1', 'Papel dos SIs na Sustentabilidade')
+            Util.txt_opcao('2', 'Economia Digital e seus reflexos sustentáveis')
+            Util.txt_opcao('3', 'Impactos Sociais das Tecnologias')
+            Util.txt_opcao('4', 'Tecnologia e Meio Ambiente')
+            Util.txt_opcao('5', 'TI Verde')
+
             opcao_assunto = int(input('Insira o valor correspondente ao assunto desejado: '))
 
             if opcao_assunto == 1:

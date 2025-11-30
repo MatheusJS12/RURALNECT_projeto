@@ -1,12 +1,13 @@
 from util import Util
 from colorama import Fore, Back, Style, init
 import videoaulas
-import esqueci_minhasenha
 import informaçoes
 from auth import Auth
 import visualizar_usuarios
 from links_gerais import Links
 from forum import Forum
+from area_questoes import Questoes
+from bibliografia import Bibliografia
 
 init(autoreset=True)
 
@@ -26,11 +27,12 @@ def menu_inicial():
         Util.cabecalho('Menu Inicial')
         print('\nBem-vindo à RURALNECT!')
         print('\nSelecione uma das opções abaixo para avançar:\n')
-        print(Style.BRIGHT + '1 - ' + Style.NORMAL + Fore.YELLOW + 'Cadastro') 
-        print(Style.BRIGHT + '2 - ' + Style.NORMAL + Fore.YELLOW + 'Login') 
-        print(Style.BRIGHT + '3 - ' + Style.NORMAL + Fore.YELLOW + 'O que é a plataforma RURALNECT?') 
-        print(Style.BRIGHT + '4 - ' + Style.NORMAL + Fore.YELLOW + 'Visualizar o cadastro') 
-        print(Style.BRIGHT + '0 - ' + Style.NORMAL + Fore.YELLOW + 'Sair do Sistema\n') 
+        Util.txt_opcao('1', 'Cadastro')
+        Util.txt_opcao('2', 'Login')
+        Util.txt_opcao('3', 'O que é a plataforma RURALNECT?')
+        Util.txt_opcao('4', 'Visualizar o cadastro')
+        Util.txt_opcao('0', 'Sair do Sistema')
+
 
         try:
             opcao = int(input('Insira a opção desejada: '))
@@ -83,18 +85,20 @@ def menu_principal(usuario_logado):
         print('usuário: {}'.format(usuario_logado['nome']))
         print('curso: {}'.format(usuario_logado['curso']))
         print('\nSelecione uma das opções abaixo para avançar:')
-        print(Style.BRIGHT + '1 - ' + Style.NORMAL + Fore.YELLOW + 'Fórum de perguntas e respostas') 
-        print(Style.BRIGHT + '2 - ' + Style.NORMAL + Fore.YELLOW + 'Lista de questões')
-        print(Style.BRIGHT + '3 - ' + Style.NORMAL + Fore.YELLOW + 'Área de videoaulas') 
-        print(Style.BRIGHT + '4 - ' + Style.NORMAL + Fore.YELLOW + 'Área de informações') 
-        print(Style.BRIGHT + '5 - ' + Style.NORMAL + Fore.YELLOW + 'Links gerais UFRPE') 
-        print(Style.BRIGHT + '6 - ' + Style.NORMAL + Fore.YELLOW + 'Área bibliográfica')
-        print(Style.BRIGHT + '0 - ' + Style.NORMAL + Fore.YELLOW + 'Deslogar') 
+        Util.txt_opcao('1', 'Fórum de perguntas e respostas')
+        Util.txt_opcao('2', 'Lista de questões')
+        Util.txt_opcao('3', 'Área de videoaulas')
+        Util.txt_opcao('4', 'Área de informações')
+        Util.txt_opcao('5', 'Links gerais UFRPE')
+        Util.txt_opcao('6', 'Área bibliográfica')
+        Util.txt_opcao('0', 'Deslogar')
+
         try:
             op1 = int(input('Insira a opção desejada: '))
             condicionais2(op1)
         except ValueError:
-            print('O valor inserido não é um número, tente novamente!')
+            Util.erro_txt('O valor inserido não é um número, tente novamente!')
+            Util.pausa(3)
             return
 def condicionais2(op1):
     if op1 == 1:
@@ -107,7 +111,8 @@ def condicionais2(op1):
         Util.limpar_tela()
         print('Acessando Lista de questões...')
         Util.pausa(3)
-        # Área da lista
+        user1 = Questoes()
+        user1.escolher_questoes(menu_principal, user.usuario_logado)
     elif op1 == 3:
         Util.limpar_tela()
         print('Acessando área de vídeoaulas...')
@@ -124,6 +129,12 @@ def condicionais2(op1):
         Util.pausa(3)
         user1 = Links()
         user1.links_gerais(menu_principal, user.usuario_logado)
+    elif op1 == 6:
+        Util.limpar_tela()
+        print('Acessando área de conteúdos bibliográficos...')
+        Util.pausa(3)
+        user1 = Bibliografia()
+        user1.area_conteudo_bibliografico(menu_principal, user.usuario_logado)
     elif op1 == 0:
         Util.limpar_tela()
         print('Deslogando...')

@@ -21,14 +21,14 @@ class Auth:
             Util.erro_txt('Seu nome está vázio ou não contém caracteres alfabéticos!')
             Util.pausa(5)
             return
-        curso = str(input('Insira as iniciais do seu curso: ').strip().upper())
+        curso = str(input('Insira as iniciais do seu curso (BSI, BCC, LC): ').strip().upper())
         if curso.isdigit() or curso == '':
             Util.erro_txt('Seu curso está vázio ou não contém caracteres alfabéticos!')
             Util.pausa(5)
             return
-        if curso == 'BSI' or 'SI':
+        if curso == ('BSI' or 'SI'):
             curso = 'Bacharelado em Sistemas de Informação'
-        elif curso == 'CC' or 'BCC':
+        elif curso == ('CC' or 'BCC'):
             curso = 'Bacharelado em Ciências da Computação'
         elif curso == 'LC':
             curso = 'Licenciatura em Computação'
@@ -76,10 +76,16 @@ class Auth:
         Util.limpar_tela()
         Util.cabecalho('Menu Login')
         print('Insira uma das opções para prosseguir:')
-        print(Style.BRIGHT + '1 - ' + Style.NORMAL + Fore.YELLOW + 'Login')
-        print(Style.BRIGHT + '2 - ' + Style.NORMAL + Fore.YELLOW + 'Recuperar Senha')
-        print(Style.BRIGHT + '0 - ' + Style.NORMAL + Fore.YELLOW + 'Voltar ao Menu Principal')
-        opcao_login = int(input('Insira a opção desejada: '))
+        Util.txt_opcao('1', 'Login')
+        Util.txt_opcao('2', 'Recuperar Senha')
+        Util.txt_opcao('0', 'Voltar ao Menu Principal')
+
+        try:
+            opcao_login = int(input('Insira a opção desejada: '))
+        except ValueError:
+            Util.erro_txt('O valor inserido não é um número inteiro, tente novamente!')
+            Util.pausa(3)
+            return
 
         if opcao_login == 1:
 

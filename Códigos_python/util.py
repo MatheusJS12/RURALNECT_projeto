@@ -29,7 +29,7 @@ class Util:
         print(emoji.emojize(Fore.GREEN + '{}:marca_de_seleção_branca:'.format(texto), language='pt'))
     
     def txt_aviso(texto):
-        print(emoji.emojize(Fore.LIGHTYELLOW_EX + ':aviso: {}:aviso:'.format(texto), language='pt'))
+        print(emoji.emojize(Fore.LIGHTYELLOW_EX + '{}:aviso:'.format(texto), language='pt'))
 
     def continuar():
         input(Fore.YELLOW + '\nPressione ENTER para continuar' + Fore.RESET)
@@ -113,9 +113,9 @@ class Util:
         Util.cabecalho('O que é a plataforma RURALNECT?')
         contador = 0
         texto_junto = ' '.join(texto_recortado)
-        for i in texto_junto:
-            print(i, end='')
-            if len(i) == 1:
+        for letra in texto_junto:
+            print(letra, end='')
+            if len(letra) == 1:
                 contador = contador + 1
             if contador % 100 == 0:
                 print('-\n')
