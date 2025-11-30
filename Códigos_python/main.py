@@ -106,7 +106,7 @@ def condicionais2(op1):
         print('Acessando fórum...')
         Util.pausa(3)
         user1 = Forum()
-        user1.pergunta_resposta(menu_principal(user.usuario_logado))
+        user1.pergunta_resposta(menu_principal, user.usuario_logado)
     elif op1 == 2:
         Util.limpar_tela()
         print('Acessando Lista de questões...')

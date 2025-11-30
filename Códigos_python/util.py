@@ -115,11 +115,10 @@ class Util:
         texto_junto = ' '.join(texto_recortado)
         for letra in texto_junto:
             print(letra, end='')
-            if len(letra) == 1:
-                contador = contador + 1
+            contador = contador + 1
             if contador % 100 == 0:
                 print('-\n')
-        input('\n\nPressione Enter para continuar...')
+        Util.continuar()
 
     def txt_opcao(num, txt):
         print(Style.BRIGHT + '{} - '.format(num) + Style.NORMAL + Fore.YELLOW + '{}'.format(txt))
@@ -143,6 +142,7 @@ class Util:
                 Util.pausa(3)
                 return menu()
             Util.redirecionador(dicionario[opcao1 - 1]['link'])
+
         elif redirecionar == 'n':
             Util.txt_aviso('Voltando para a área de links gerais')
             Util.pausa(3)

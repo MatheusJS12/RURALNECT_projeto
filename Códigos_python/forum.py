@@ -7,7 +7,7 @@ class Forum:
     def __init__(self):
         self.perguntas = []
 
-    def pergunta_resposta(self, menu_principal):
+    def pergunta_resposta(self, menu_principal, usuario_logado):
         while True:
             Util.limpar_tela()
             Util.cabecalho('Fórum')
@@ -18,14 +18,14 @@ class Forum:
             Util.txt_opcao('0', 'Voltar ao Menu Principal\n')
             try:
                 opcao = int(input('Insira a opção desejada: '))
-                self.condicionais(opcao, menu_principal)
+                self.condicionais(opcao, menu_principal, usuario_logado)
                 
             except ValueError:
                 Util.erro_txt('O valor inserido não é um número inteiro, tente novamente!')
                 Util.pausa(3)
                 return
             
-    def condicionais(self, opcao, menu_principal):
+    def condicionais(self, opcao, menu_principal, usuario_logado):
         Util.limpar_tela()
         if opcao == 1:
             Util.cabecalho('Área de perguntas')
@@ -60,7 +60,7 @@ class Forum:
             elif perguntar == 'n':
                 Util.txt_aviso('Voltando para o Menu Pruncipal!')
                 Util.pausa(3)
-                return menu_principal
+                return menu_principal(usuario_logado)
             
             else:
                 Util.erro_txt('A opção escolhida é inexistente!')
@@ -116,14 +116,14 @@ class Forum:
                 
 
             elif responder == 'n':
-                Util.txt_aviso('Voltando para o Menu Pruncipal!')
+                Util.txt_aviso('Voltando para a seleção de opção')
                 Util.pausa(3)
-                return #menu_principal()
+                return 
             
             else:
                 Util.erro_txt('A opção escolhida é inexistente!')
                 Util.pausa(3)
-                return #menu_principal()
+                return
             
         elif opcao == 3:
             Util.cabecalho('Perguntas e Respostas')
