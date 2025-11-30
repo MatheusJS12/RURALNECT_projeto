@@ -2,7 +2,7 @@ from util import Util
 from colorama import Fore, Back, Style, init
 import recuperar_senha
 
-init(autoreset=True)
+init(autoreset=False)
 
 class Auth:
     def __init__(self):

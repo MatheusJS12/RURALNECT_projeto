@@ -9,7 +9,7 @@ from forum import Forum
 from area_questoes import Questoes
 from bibliografia import Bibliografia
 
-init(autoreset=True)
+init(autoreset=False)
 
 # No código estão algumas sequências de escape que têm a função de colorir o terminal. Por exemplo: \033[33m (transforma o texto em amarelo)
 

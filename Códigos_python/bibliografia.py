@@ -1,7 +1,7 @@
 from util import Util
 from colorama import Fore, Back, Style, init
 
-init(autoreset=True)
+init(autoreset=False)
 
 class Bibliografia:
     def __init__(self):

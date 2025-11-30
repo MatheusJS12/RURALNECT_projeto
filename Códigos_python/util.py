@@ -32,7 +32,7 @@ class Util:
         print(emoji.emojize(Fore.LIGHTYELLOW_EX + '{}:aviso:'.format(texto), language='pt'))
 
     def continuar():
-        input(Fore.YELLOW + '\nPressione ENTER para continuar' + Fore.RESET)
+        input(Fore.YELLOW + '\n\nPressione ENTER para continuar' + Fore.RESET)
 
     def videoaula(assunto, professor, link, sinopse):
         Util.limpar_tela()
