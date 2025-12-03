@@ -35,7 +35,7 @@ class Forum:
                 Util.limpar_tela()
                 Util.cabecalho('Área de perguntas')
 
-                pergunta = str(input(Fore.LIGHTCYAN_EX + 'Pergunta (deve conter, no mínimo, 10 caracteres e no máximo 500): ' + Fore.RESET).strip().capitalize())
+                pergunta = str(input(Fore.LIGHTCYAN_EX + 'Pergunta (deve conter, no mínimo, 10 caracteres e, no máximo, 500): ' + Fore.RESET).strip().capitalize())
                 
                 if not pergunta:
                     Util.erro_txt('O campo está vazio, preencha-o!')
@@ -139,4 +139,9 @@ class Forum:
                         else:
                             print('     — {}'.format(resp))
             Util.continuar()
+        
+        elif opcao == 0:
+            Util.txt_aviso('Retornando ao Menu Principal')
+            Util.pausa(3)
+            return menu_principal(usuario_logado)
 

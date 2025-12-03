@@ -1,7 +1,7 @@
 from util import Util
 from colorama import Fore, Back, Style, init
-import videoaulas
-import informaçoes
+from videoaulas import Videoaulas
+from informaçoes import Informacoes
 from auth import Auth
 import visualizar_usuarios
 from links_gerais import Links
@@ -30,12 +30,11 @@ def menu_inicial():
         Util.txt_opcao('1', 'Cadastro')
         Util.txt_opcao('2', 'Login')
         Util.txt_opcao('3', 'O que é a plataforma RURALNECT?')
-        Util.txt_opcao('4', 'Visualizar o cadastro')
         Util.txt_opcao('0', 'Sair do Sistema')
 
 
         try:
-            opcao = int(input('Insira a opção desejada: '))
+            opcao = int(input('\nInsira a opção desejada: '))
             condicionais_menu(opcao)
         except ValueError:
             Util.erro_txt('O valor inserido não é um número inteiro, tente novamente!')
@@ -49,28 +48,26 @@ def condicionais_menu(opcao):
         Util.pausa(2)
         Util.limpar_tela()
         user.cadastro_usuario()
+
     elif opcao == 2:
         Util.limpar_tela()
         print('Acessando a área de Login...')
         Util.pausa(2)
         user.login(menu_inicial)
         menu_principal(user.usuario_logado)
+
     elif opcao == 3:
         Util.limpar_tela()
         print('Preparando para exibir informações...')
         Util.pausa(2)
         Util.info_rural(texto_recortado)
-    elif opcao == 4:
-        Util.limpar_tela()
-        print('Acessando a área de visualização de informações...')
-        Util.pausa(2)
-        visualizar_usuarios.visualizar(user.usuarios)
 
     elif opcao == 0:
         Util.limpar_tela()
         print('Saindo do sistema...')
         Util.pausa(3)
         quit()
+
     else:
         Util.limpar_tela()
         Util.erro_txt('A opção inserida é inválida!')
@@ -91,57 +88,80 @@ def menu_principal(usuario_logado):
         Util.txt_opcao('4', 'Área de informações')
         Util.txt_opcao('5', 'Links gerais UFRPE')
         Util.txt_opcao('6', 'Área bibliográfica')
+        Util.txt_opcao('7', 'configurações (inoperante)')
         Util.txt_opcao('0', 'Deslogar')
 
         try:
-            op1 = int(input('Insira a opção desejada: '))
+            op1 = int(input('\nInsira a opção desejada: '))
             condicionais2(op1)
         except ValueError:
             Util.erro_txt('O valor inserido não é um número, tente novamente!')
             Util.pausa(3)
-            return
+            continue
+        
 def condicionais2(op1):
+    
     if op1 == 1:
         Util.limpar_tela()
         print('Acessando fórum...')
         Util.pausa(3)
         user1 = Forum()
         user1.pergunta_resposta(menu_principal, user.usuario_logado)
+
     elif op1 == 2:
         Util.limpar_tela()
         print('Acessando Lista de questões...')
         Util.pausa(3)
         user1 = Questoes()
         user1.escolher_questoes(menu_principal, user.usuario_logado)
+
     elif op1 == 3:
         Util.limpar_tela()
         print('Acessando área de vídeoaulas...')
         Util.pausa(3)
-        videoaulas.area_videoaulas(user.usuario_logado)
+        vid = Videoaulas()
+        vid.area_videoaulas(user.usuario_logado)
+
     elif op1 == 4:
         Util.limpar_tela()
         print('Acssando área de informações...')
         Util.pausa(3)
-        informaçoes.area_informacoes(user.usuario_logado)
+        info = Informacoes()
+        info.area_informacoes(user.usuario_logado)
+
     elif op1 == 5:
         Util.limpar_tela()
         print('Acessando área de links gerais...')
         Util.pausa(3)
         user1 = Links()
         user1.links_gerais(menu_principal, user.usuario_logado)
+
     elif op1 == 6:
         Util.limpar_tela()
         print('Acessando área de conteúdos bibliográficos...')
         Util.pausa(3)
         user1 = Bibliografia()
         user1.area_conteudo_bibliografico(menu_principal, user.usuario_logado)
+    
+    elif op1 == 7:
+        Util.limpar_tela()
+        print('Acessando configurações...')
+        Util.pausa(3)
+        Util.erro_txt('O código ainda está sendo implementado!')
+        Util.pausa(3)
+        return
+
+
     elif op1 == 0:
         Util.limpar_tela()
         print('Deslogando...')
         Util.pausa(3)
         menu_inicial()
+
     else:
         Util.erro_txt('A opção inserida é inválida!')
+        Util.pausa(3)
+        return
 
 
 menu_inicial()

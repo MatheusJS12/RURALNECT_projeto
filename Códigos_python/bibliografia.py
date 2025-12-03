@@ -26,32 +26,53 @@ class Bibliografia:
                 ] 
             }
         ]
+        self.conteudos_bcc = [
+            {
+                'cadeira': 'adicionar algo',
+                'conteudos': [
+
+                ]
+            }
+        ]
+        self.conteudos_lc = [
+            {
+                'cadeira': 'adicionar algo',
+                'conteudos': []
+            }
+        ]
     def area_conteudo_bibliografico(self, menu_principal, usuario_logado):
         while True:
             Util.limpar_tela()
             Util.cabecalho('Área de conteúdo bibliográfico')
+            if usuario_logado['curso'] == 'Bacharelado em Sistemas de Informação':
+                self.bloco_conteudo_bibliografico(self.conteudos_bsi, menu_principal, usuario_logado)
 
-            for i, item in enumerate(self.conteudos_bsi):
-                Util.txt_opcao(i + 1, item["cadeira"])
+            elif usuario_logado['curso'] == 'Bacharelado em Ciências da Computação':
+                self.bloco_conteudo_bibliografico(self.conteudos_bcc, menu_principal, usuario_logado)
 
-            Util.txt_opcao('0', 'Menu Principal')
-            try:
-                opcao = int(input('\nDigite o número da cadeira: '))
-                self.condicionais(opcao, menu_principal, usuario_logado)
-
-            except ValueError:
-                Util.erro_txt('O valor inserido não é um número inteiro, tente novamente!')
-                Util.pausa(3)
-                return
-
-            if opcao == '':
-                Util.erro_txt('O campo está vazio, digite a opção desejada')
-                return
+            elif usuario_logado['curso'] == 'Licenciatura em Computação':
+                self.bloco_conteudo_bibliografico(self.conteudos_lc, menu_principal, usuario_logado)
             
-    def condicionais(self, opcao, menu_principal, usuario_logado):
+    def bloco_conteudo_bibliografico(self, conteudinho, menu_principal, usuario_logado):
+        for i, item in enumerate(conteudinho):
+            Util.txt_opcao(i + 1, item["cadeira"])
+
+        Util.txt_opcao('0', 'Menu Principal')
+        try:
+            opcao = int(input('\nDigite o número da cadeira: '))
+
+        except ValueError:
+            Util.erro_txt('O valor inserido não é um número inteiro, tente novamente!')
+            Util.pausa(3)
+            return
+
+        if opcao == '':
+            Util.erro_txt('O campo está vazio, digite a opção desejada')
+            return
+    
         Util.limpar_tela()
-        if 1 <= opcao <= len(self.conteudos_bsi):
-            cadeira = self.conteudos_bsi[opcao - 1]
+        if 1 <= opcao <= len(conteudinho):
+            cadeira = conteudinho[opcao - 1]
             Util.cabecalho(cadeira["cadeira"])
             for u, conteudo in enumerate(cadeira['conteudos']):
                 print('{}. {}'.format(u + 1, conteudo))
@@ -63,9 +84,9 @@ class Bibliografia:
                 Util.redirecionador(cadeira['conteudos'][num_conteudo - 1])
 
             elif redirecionador == 'n':
-                Util.txt_aviso('Voltando para o Menu Principal')
+                Util.txt_aviso('Voltando para a área bibliográfica')
                 Util.pausa(3)
-                return #adicionar o menu_principal()
+                return 
             
             else:
                 Util.erro_txt('A opção escolhida é inexistente!')
@@ -74,7 +95,7 @@ class Bibliografia:
             Util.txt_aviso('Retornando ao Menu Principal')
             Util.pausa(3)
             menu_principal(usuario_logado)
-                                           
+                                        
         else:
             Util.erro_txt('Insira uma opção válida')
             return

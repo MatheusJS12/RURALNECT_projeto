@@ -25,19 +25,31 @@ class Questoes:
         Util.limpar_tela()
         Util.cabecalho('Listas de Questões')
         # if not self.nome_da_lista:
-        print('Selecione uma das opções a seguir:')
-        for i, lista in enumerate(self.lista_perguntas_bsi):
+        if usuario_logado['curso'] == 'Bacharelado em Sistemas de Informação':
+            self.bloco_escolher_questoes(self.lista_perguntas_bsi, menu_principal, usuario_logado)
+
+        elif usuario_logado['curso'] == 'Bacharelado em Ciências da Computação':
+            self.bloco_escolher_questoes(self.lista_perguntas_bcc, menu_principal, usuario_logado)
+        
+        elif usuario_logado['curso'] == 'Licenciatura em Computação':
+            self.bloco_escolher_questoes(self.lista_perguntas_lc, menu_principal, usuario_logado)
+        
+    def bloco_escolher_questoes(self, listinha, menu_principal, usuario_logado):
+        if not listinha:
+            Util.erro_txt('A lista de questões está vazia!')
+            return
+        for i, lista in enumerate(listinha):
             Util.txt_opcao(i + 1, lista['cadeira'])
-        Util.txt_opcao('0', 'Menu Principal')
+            Util.txt_opcao('0', 'Menu Principal')
         
         try:
             lista_selecao = int(input(Fore.LIGHTYELLOW_EX + '\nInsira o valor da lista desejada: ' + Fore.RESET))
-            cadeira = self.lista_perguntas_bsi[lista_selecao - 1]
+            cadeira = listinha[lista_selecao - 1]
             if lista_selecao == 0:
                 Util.txt_aviso('Retornando ao Menu Principal')
                 Util.pausa(3)
                 return menu_principal(usuario_logado)
-            elif lista_selecao < 0 or lista_selecao > len(self.lista_perguntas_bsi):
+            elif lista_selecao < 0 or lista_selecao > len(listinha):
                 Util.erro_txt('Opção inválida!')
                 Util.pausa(3)
                 return
@@ -67,7 +79,7 @@ class Questoes:
             Util.txt_aviso('Voltando para a escolha da cadeira')
             Util.pausa(3)
             return
-        
+            
         else:
             Util.erro_txt('A opção escolhida é inexistente!')
             Util.pausa(3)

@@ -1,0 +1,4 @@
+colorama
+maskpass
+emoji
+python-dotenv
