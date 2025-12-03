@@ -63,6 +63,7 @@ O projeto RURALNECT tem como principal objetivo providenciar, para a comunidade 
 | colorama | utilizado para colorir o terminal |
 | emoji | utilizado para adicionar emojis |
 | maskpass | utilizado para mascarar a senha |
+| socket | utilizado unicamente para fazer o tratamento de erro do envio do e-mail, com ausência de internet |
 
 # INSTALAÇÃO NECESSÁRIA DAS SEGUINTES BIBLIOTECAS PARA O FUNCIONAMENTO DO CÓDIGO:
 
