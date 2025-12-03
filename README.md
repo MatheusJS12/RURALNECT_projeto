@@ -20,6 +20,13 @@ O projeto RURALNECT tem como principal objetivo providenciar, para a comunidade 
 
 (será adicionado em breve)
 
+# DATAS DAS ENTREGAS:
+
+- [x] 1VA 22/10/25
+- [x] 2VA 03/12/25
+- [ ] 3VA 10/12/25
+
+
 # RELEASE 1:
 
 * RF001 - Menu Inicial (exibir função de cadastro e login)
@@ -55,12 +62,12 @@ O projeto RURALNECT tem como principal objetivo providenciar, para a comunidade 
 | webbrowser | utilizado para redirecionar o usuário para as videoaulas, links em geral, apostilas, etc. |
 | colorama | utilizado para colorir o terminal |
 | emoji | utilizado para adicionar emojis |
+| maskpass | utilizado para mascarar a senha |
 
 # INSTALAÇÃO NECESSÁRIA DAS SEGUINTES BIBLIOTECAS PARA O FUNCIONAMENTO DO CÓDIGO:
 
 ```
-pip install colorama
-pip install emoji
+pip install requerimentos.txt
 
  ```
 
