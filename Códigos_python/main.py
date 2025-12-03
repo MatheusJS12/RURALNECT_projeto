@@ -88,7 +88,7 @@ def menu_principal(usuario_logado):
         Util.txt_opcao('4', 'Área de informações')
         Util.txt_opcao('5', 'Links gerais UFRPE')
         Util.txt_opcao('6', 'Área bibliográfica')
-        Util.txt_opcao('7', 'configurações (inoperante)')
+        Util.txt_opcao('7', 'configurações')
         Util.txt_opcao('0', 'Deslogar')
 
         try:
@@ -147,10 +147,7 @@ def condicionais2(op1):
         Util.limpar_tela()
         print('Acessando configurações...')
         Util.pausa(3)
-        Util.erro_txt('O código ainda está sendo implementado!')
-        Util.pausa(3)
-        return
-
+        user.configuracoes(menu_inicial)
 
     elif op1 == 0:
         Util.limpar_tela()
