@@ -147,7 +147,8 @@ class Auth:
         
     def configuracoes(self, menu_inicial):
         Util.cabecalho('Configurações')
-        Util.txt_opcao('\n1', 'Deletar conta')
+        Util.txt_opcao('\n1', 'Deletar conta (em desenvolvimento)')
+        Util.txt_opcao('2', 'visualizar informações')
         Util.txt_opcao('0', 'Voltar ao Menu Principal')
 
         try:
@@ -159,13 +160,24 @@ class Auth:
             return
 
         if opcao == 1:
-            print('Acessando Deletar Conta')
+            print('Acessando Deletar Conta...')
             Util.pausa(2)
-            self.deletar_conta(menu_inicial)
+            print('Ainda está sendo elaborado, chega em breve!')
+            return
+        
+        elif opcao == 2:
+            print('Acessando visualização de conta...')
+            Util.pausa(2)
+            self.visualizar()
 
         elif opcao == 0:
             Util.txt_aviso('Retornando ao Menu Principal')
             Util.pausa(2)
+            return
+
+        else:
+            Util.erro_txt('Opção inválida!')
+            Util.pausa(3)
             return
 
     def deletar_conta(self, menu_inicial):
@@ -203,4 +215,14 @@ class Auth:
             Util.txt_aviso('Voltando ao Menu Principal')
             Util.pausa(3)
             return
+        
+    def visualizar(self):
+        Util.limpar_tela()
+        for conta in self.usuarios:
+                if self.usuario_logado['email'] == conta['email']:
+                    print('nome: {}'.format(conta['nome']))
+                    print('curso: {}'.format(conta['curso']))
+                    print('e-mail: {}'.format(conta['email']))
+                    Util.continuar()
+                    break
         
