@@ -69,6 +69,9 @@ O projeto RURALNECT tem como principal objetivo providenciar, para a comunidade 
 
 ```
 pip install requerimentos.txt
-
+ ```
+Caso o comando acima não funcione, tente:
+```
+pip install maskpass colorama emoji socket
  ```
 
