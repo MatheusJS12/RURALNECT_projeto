@@ -1,4 +1,4 @@
 colorama
 maskpass
+socket
 emoji
-python-dotenv
